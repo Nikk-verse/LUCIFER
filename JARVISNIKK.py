@@ -1,4 +1,3 @@
-# ==== Importing all the necessary libraries
 import speech_recognition as sr
 import pyttsx3
 import webbrowser
@@ -10,7 +9,6 @@ from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 import pygetwindow as gw
 
-# ==== Class Assistant
 class assistance_gui:
     def __init__(self, root):
         self.root = root
@@ -23,25 +21,25 @@ class assistance_gui:
         self.centre = ImageTk.PhotoImage(file="images/frame.jpg")
         left = Label(self.root, image=self.centre).place(x=100, y=100, width=400, height=400)
 
-        # ====start button
+      
         start = Button(self.root, text='START', font=("times new roman", 14), command=self.start_option).place(x=150, y=520)
 
-        # ====close button
+      
         close = Button(self.root, text='CLOSE', font=("times new roman", 14), command=self.close_window).place(x=350, y=520)
 
-    # ==== start assistant
+   
     def start_option(self):
         listener = sr.Recognizer()
         engine = pyttsx3.init()
 
-        # ==== Voice Control
+        
         def speak(text):
             engine.say(text)
             engine.runAndWait()
 
-        # ====Default Start
+      
         def start():
-            # ==== Wish Start
+            
             hour = int(datetime.datetime.now().hour)
             if hour >= 0 and hour < 12:
                 wish = "Good Morning!"
@@ -50,9 +48,9 @@ class assistance_gui:
             else:
                 wish = "Good Evening!"
             speak('Hello Sir,' + wish + ' I am your voice assistant. Please tell me how may I help you')
-            # ==== Wish End
+            
 
-        # ==== Take Command
+       
         def take_command():
             try:
                 with sr.Microphone() as data_taker:
@@ -64,7 +62,7 @@ class assistance_gui:
             except:
                 pass
 
-        # ==== Run command
+        
         def run_command():
             instruction = take_command()
             print(instruction)
@@ -173,17 +171,17 @@ class assistance_gui:
                 speak('Waiting for your response')
             return True
 
-        # ====Default Start calling
+        
         start()
 
-        # ====To run assistance continuously
+      
         while True:
             if run_command():
                 run_command()
             else:
                 break
 
-    # ==== Close window
+    
     def close_window(self):
         self.root.destroy()
 
